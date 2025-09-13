@@ -5,6 +5,7 @@ import OurStory from './components/OurStory'
 import WhyChoose from './components/WhyChoose'
 import Courses from './components/Courses'
 import StudentGallery from './components/StudentGallery'
+import SuccessStories from './components/SuccessStories'
 import VideoHighlights from './components/VideoHighlights'
 import About from './components/About'
 import FAQ from './components/FAQ'
@@ -15,7 +16,7 @@ import ScrollToTop from './components/ScrollToTop'
 
 function App() {
   return (
-    <div className="min-h-screen bg-nai-soft">
+    <div className="min-h-screen bg-nai-soft w-full">
       <Navigation />
       <section id="hero">
         <Hero />
@@ -27,6 +28,9 @@ function App() {
       </section>
       <section id="gallery">
         <StudentGallery />
+      </section>
+      <section id="success-stories">
+        <SuccessStories />
       </section>
       <VideoHighlights />
       <section id="about">

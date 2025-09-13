@@ -46,7 +46,7 @@ const VideoHighlights = () => {
 
   return (
     <section ref={ref} className="section-padding bg-nai-soft">
-      <div className="container-custom">
+      <div className="container-responsive">
         <motion.div 
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}

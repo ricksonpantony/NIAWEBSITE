@@ -113,17 +113,17 @@ const StudentGallery = () => {
 
   return (
     <section ref={ref} className="section-padding bg-white">
-      <div className="container-custom">
+      <div className="container-responsive">
         <motion.div 
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16 lg:mb-20"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-nai-dark mb-6">
+          <h2 className="text-responsive-lg font-bold text-nai-dark mb-4 sm:mb-6">
             Student <span className="text-gradient">Success Stories</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-responsive-sm text-gray-600 max-w-3xl mx-auto">
             Meet some of our successful graduates who have achieved their nursing dreams with NAI's support.
           </p>
         </motion.div>
@@ -299,7 +299,7 @@ const StudentGallery = () => {
             <h3 className="text-2xl font-bold mb-6">Join Our Success Stories</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               <div>
-                <div className="text-3xl font-bold mb-2">500+</div>
+                <div className="text-3xl font-bold mb-2">3000+</div>
                 <div className="text-sm opacity-90">Students Passed</div>
               </div>
               <div>

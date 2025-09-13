@@ -43,8 +43,8 @@ const Navigation = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="container-custom">
-        <div className="flex items-center justify-between h-16">
+      <div className="container-responsive">
+        <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo */}
           <motion.div
             className="flex items-center"
@@ -53,17 +53,17 @@ const Navigation = () => {
             <img 
               src="/image.png" 
               alt="Nurse Assist International" 
-              className="w-28 h-28 object-contain"
+              className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 object-contain"
             />
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-6 xl:gap-8">
             {navItems.map((item) => (
               <button
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
-                className="text-nai-dark hover:text-nai-highlight font-medium transition-colors duration-200"
+                className="text-nai-dark hover:text-nai-highlight font-medium transition-colors duration-200 text-sm xl:text-base"
               >
                 {item.name}
               </button>
@@ -71,12 +71,12 @@ const Navigation = () => {
           </div>
 
           {/* Contact Buttons */}
-          <div className="hidden lg:flex items-center gap-3">
-            <button className="flex items-center gap-2 text-nai-dark hover:text-nai-highlight transition-colors">
-              <Phone className="w-4 h-4" />
-              <span className="text-sm">+61 478 320 397</span>
+          <div className="hidden lg:flex items-center gap-2 xl:gap-3">
+            <button className="flex items-center gap-1 xl:gap-2 text-nai-dark hover:text-nai-highlight transition-colors">
+              <Phone className="w-3 h-3 xl:w-4 xl:h-4" />
+              <span className="text-xs xl:text-sm">+61 478 320 397</span>
             </button>
-            <button className="btn-primary text-sm py-2 px-4">
+            <button className="btn-primary text-xs xl:text-sm py-2 px-3 xl:px-4">
               Enroll Now
             </button>
           </div>
@@ -101,7 +101,7 @@ const Navigation = () => {
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="container-custom py-4">
+            <div className="container-responsive py-4">
               <div className="space-y-4">
                 {navItems.map((item) => (
                   <button

@@ -1,5 +1,5 @@
-import React from 'react'
-import { motion } from 'framer-motion'
+import React, { useState, useRef, useEffect } from 'react'
+import { motion, useInView } from 'framer-motion'
 import { 
   Award, 
   Users, 
@@ -18,10 +18,26 @@ import {
   GraduationCap,
   Trophy,
   Sparkles,
-  ArrowRight
+  ArrowRight,
+  Play,
+  ExternalLink
 } from 'lucide-react'
 
 const OurStory = () => {
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
+  const videoRef = useRef(null)
+  const isInView = useInView(videoRef, { 
+    threshold: 0.3,
+    once: false 
+  })
+
+  // Auto-play video when it comes into view
+  useEffect(() => {
+    if (isInView && !isVideoPlaying) {
+      setIsVideoPlaying(true)
+    }
+  }, [isInView, isVideoPlaying])
+  
   const achievements = [
     {
       icon: Trophy,
@@ -120,51 +136,86 @@ const OurStory = () => {
 
   return (
     <section className="py-20 bg-gradient-to-br from-nai-soft via-white to-nai-soft">
-      <div className="container-custom">
-        {/* Hero Header with Image */}
+      <div className="container-responsive">
+        {/* Professional Hero Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="relative mb-20"
+          className="relative mb-16"
         >
-          {/* Background Image Section */}
-          <div className="relative h-96 md:h-[500px] rounded-3xl overflow-hidden mb-12">
-            <div className="absolute inset-0 bg-gradient-to-r from-nai-highlight/90 to-nai-deep-teal/90 z-10"></div>
-            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center"></div>
-            
-            {/* Content Overlay */}
-            <div className="relative z-20 h-full flex items-center">
-              <div className="container-custom">
-                <div className="max-w-4xl">
+          {/* Clean Title Section */}
+          <div className="bg-white rounded-2xl p-8 sm:p-12 shadow-lg border border-gray-200">
+            <div className="text-center max-w-4xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                {/* Professional Subtitle */}
+                <div className="mb-6">
+                  <span className="inline-block bg-nai-highlight text-white text-xs font-semibold uppercase tracking-wider px-4 py-2 rounded">
+                    Our Foundation
+                  </span>
+                </div>
+                
+                {/* Clean Main Title */}
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-nai-dark mb-6 leading-tight">
+                  Our <span className="text-nai-highlight">Story</span>
+                </h1>
+                
+                {/* Professional Description */}
+                <p className="text-base sm:text-lg text-gray-600 leading-relaxed mb-8 max-w-3xl mx-auto">
+                  Nurse Assist International (NAI) is the leading institute and the first ever registered company in Australia to provide NCLEX-RN and OSCE training for internationally qualified nurses (IQNMs).
+                </p>
+                
+                {/* Professional Stats Row */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
                   <motion.div
-                    initial={{ opacity: 0, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
                     viewport={{ once: true }}
-                    className="text-white"
+                    className="text-center"
                   >
-                    <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-                      Our <span className="text-yellow-300">Story</span>
-                    </h2>
-                    <p className="text-xl md:text-2xl leading-relaxed mb-8 opacity-95">
-                      Nurse Assist International (NAI) is the leading institute and the first ever registered company in Australia to provide NCLEX-RN and OSCE training for internationally qualified nurses (IQNMs).
-                    </p>
-                    <div className="flex flex-wrap gap-4">
-                      <div className="bg-white/20 backdrop-blur-sm rounded-full px-6 py-3">
-                        <span className="text-sm font-semibold">🏆 Australia's #1</span>
-                      </div>
-                      <div className="bg-white/20 backdrop-blur-sm rounded-full px-6 py-3">
-                        <span className="text-sm font-semibold">📚 Since 2019</span>
-                      </div>
-                      <div className="bg-white/20 backdrop-blur-sm rounded-full px-6 py-3">
-                        <span className="text-sm font-semibold">🎯 95%+ Success Rate</span>
-                      </div>
+                    <div className="w-12 h-12 bg-nai-highlight rounded-lg flex items-center justify-center mx-auto mb-3">
+                      <Trophy className="w-6 h-6 text-white" />
                     </div>
+                    <h3 className="text-lg font-semibold text-nai-dark mb-1">Australia's #1</h3>
+                    <p className="text-sm text-gray-500">Leading Institute</p>
+                  </motion.div>
+                  
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.5 }}
+                    viewport={{ once: true }}
+                    className="text-center"
+                  >
+                    <div className="w-12 h-12 bg-nai-deep-teal rounded-lg flex items-center justify-center mx-auto mb-3">
+                      <Calendar className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-nai-dark mb-1">Since 2019</h3>
+                    <p className="text-sm text-gray-500">Established Excellence</p>
+                  </motion.div>
+                  
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.6 }}
+                    viewport={{ once: true }}
+                    className="text-center"
+                  >
+                    <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+                      <Target className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-nai-dark mb-1">95%+ Success Rate</h3>
+                    <p className="text-sm text-gray-500">Proven Results</p>
                   </motion.div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </motion.div>
@@ -182,20 +233,30 @@ const OurStory = () => {
             {/* Left - Content */}
             <div className="space-y-8">
               <div>
-                <h3 className="text-3xl font-bold text-nai-dark mb-6 flex items-center gap-3">
-                  <div className="w-12 h-12 bg-gradient-to-r from-nai-highlight to-nai-deep-teal rounded-2xl flex items-center justify-center">
-                    <Globe className="w-6 h-6 text-white" />
+                <div className="mb-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 bg-nai-highlight rounded-lg flex items-center justify-center">
+                      <Globe className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <span className="text-xs font-semibold text-nai-highlight uppercase tracking-wider">
+                        Our Foundation
+                      </span>
+                      <h3 className="text-xl sm:text-2xl font-bold text-nai-dark leading-tight">
+                        Our Journey
+                      </h3>
+                    </div>
                   </div>
-                  Our Journey
-                </h3>
+                  <div className="w-16 h-0.5 bg-nai-highlight rounded-full"></div>
+                </div>
                 <div className="space-y-6">
-                  <p className="text-gray-600 leading-relaxed text-lg">
+                  <p className="text-gray-600 leading-relaxed text-base sm:text-lg">
                     Our journey began in 2019 when the Australian Health Practitioner Regulation Agency (AHPRA) and NMBA introduced the Outcome Based Assessment (OBA) as the new model to assess international nurses.
                   </p>
-                  <p className="text-gray-600 leading-relaxed text-lg">
+                  <p className="text-gray-600 leading-relaxed text-base sm:text-lg">
                     Since March 2020, all internationally qualified nurses (IQNMs) with relevant but not substantially equivalent qualifications must successfully complete the OBA pathway, which includes the Next Generation NCLEX-RN (NGN) and the OSCE (Objective Structured Clinical Examination).
                   </p>
-                  <p className="text-gray-600 leading-relaxed text-lg">
+                  <p className="text-gray-600 leading-relaxed text-base sm:text-lg">
                     Recognizing the urgent need for specialized training, a team of passionate Nurse Educators established Nurse Assist International (NAI). Since then, NAI has become widely known for helping IQNMs confidently prepare for and pass the NCLEX-RN and OSCE exams.
                   </p>
                 </div>
@@ -204,21 +265,21 @@ const OurStory = () => {
 
             {/* Right - Image */}
             <div className="relative">
-              <div className="relative h-96 rounded-3xl overflow-hidden shadow-2xl">
+              <div className="relative h-80 sm:h-96 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl">
                 <div className="absolute inset-0 bg-gradient-to-br from-nai-highlight/20 to-nai-deep-teal/20 z-10"></div>
                 <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')] bg-cover bg-center"></div>
               </div>
               {/* Floating Stats */}
-              <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-6 shadow-xl border border-gray-100">
+              <div className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-xl border border-gray-100">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-nai-highlight">2019</div>
-                  <div className="text-sm text-gray-600">Founded</div>
+                  <div className="text-xl sm:text-2xl font-bold text-nai-highlight">2019</div>
+                  <div className="text-xs sm:text-sm text-gray-600">Founded</div>
                 </div>
               </div>
-              <div className="absolute -top-6 -right-6 bg-white rounded-2xl p-6 shadow-xl border border-gray-100">
+              <div className="absolute -top-4 -right-4 sm:-top-6 sm:-right-6 bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-xl border border-gray-100">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-green-600">1st</div>
-                  <div className="text-sm text-gray-600">Registered</div>
+                  <div className="text-xl sm:text-2xl font-bold text-green-600">1st</div>
+                  <div className="text-xs sm:text-sm text-gray-600">Registered</div>
                 </div>
               </div>
             </div>
@@ -232,9 +293,15 @@ const OurStory = () => {
             viewport={{ once: true }}
             className="mb-16"
           >
-            <h3 className="text-3xl font-bold text-center text-nai-dark mb-12">
-              Our <span className="text-gradient">Timeline</span>
-            </h3>
+            <div className="text-center mb-8">
+              <span className="text-xs font-semibold text-nai-highlight uppercase tracking-wider mb-2 block">
+                Our Progress
+              </span>
+              <h3 className="text-xl sm:text-2xl font-bold text-nai-dark mb-3">
+                Our <span className="text-nai-highlight">Timeline</span>
+              </h3>
+              <div className="w-12 h-0.5 bg-nai-highlight rounded-full mx-auto"></div>
+            </div>
             
             {/* Compact Timeline Container */}
             <div className="relative max-w-4xl mx-auto">
@@ -292,7 +359,7 @@ const OurStory = () => {
             </div>
           </motion.div>
 
-          {/* Mission Statement with Image */}
+          {/* Mission Statement with Video */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -300,35 +367,156 @@ const OurStory = () => {
             viewport={{ once: true }}
             className="grid lg:grid-cols-2 gap-12"
           >
-            {/* Left - Image */}
+            {/* Left - YouTube Video */}
             <div className="relative">
-              <div className="relative h-80 rounded-3xl overflow-hidden shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-nai-highlight/20 to-nai-deep-teal/20 z-10"></div>
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')] bg-cover bg-center"></div>
+              <div className="relative bg-white rounded-3xl p-6 shadow-2xl border border-gray-100">
+                {/* Video Header */}
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center">
+                    <Play className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <span className="text-xs font-semibold text-red-600 uppercase tracking-wider">
+                      Watch Our Story
+                    </span>
+                    <h3 className="text-lg font-bold text-nai-dark leading-tight">Success Stories</h3>
+                  </div>
+                </div>
+                
+                {/* Video Container */}
+                <motion.div 
+                  ref={videoRef} 
+                  className="relative aspect-video rounded-2xl overflow-hidden shadow-xl bg-gray-900"
+                  animate={isInView && !isVideoPlaying ? {
+                    boxShadow: "0 25px 50px -12px rgba(0, 166, 181, 0.25)"
+                  } : {}}
+                  transition={{ duration: 0.3 }}
+                >
+                  {!isVideoPlaying ? (
+                    <div 
+                      className="relative w-full h-full cursor-pointer group"
+                      onClick={() => setIsVideoPlaying(true)}
+                    >
+                      {/* Video Thumbnail */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-nai-highlight/20 to-nai-deep-teal/20"></div>
+                      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')] bg-cover bg-center"></div>
+                      
+                      {/* Play Button Overlay */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <motion.div
+                          className="relative"
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <div className="w-20 h-20 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-2xl group-hover:bg-white transition-colors duration-300">
+                            <Play className="w-8 h-8 text-nai-highlight ml-1" />
+                          </div>
+                          <div className="absolute inset-0 w-20 h-20 bg-nai-highlight/20 rounded-full animate-ping"></div>
+                        </motion.div>
+                      </div>
+                      
+                      {/* Auto-play Loading Indicator */}
+                      {isInView && !isVideoPlaying && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="absolute top-4 left-4 bg-nai-highlight/90 backdrop-blur-sm text-white px-3 py-2 rounded-lg text-sm font-medium flex items-center gap-2"
+                        >
+                          <motion.div
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                            className="w-4 h-4 border-2 border-white border-t-transparent rounded-full"
+                          />
+                          Starting video...
+                        </motion.div>
+                      )}
+                      
+                      {/* Video Info Overlay */}
+                      <div className="absolute bottom-4 left-4 right-4">
+                        <div className="bg-black/70 backdrop-blur-sm rounded-lg p-3 text-white">
+                          <h4 className="font-semibold text-sm mb-1">NAI Success Stories</h4>
+                          <p className="text-xs text-gray-300">Hear from our successful nursing graduates</p>
+                        </div>
+                      </div>
+                      
+                      {/* YouTube Branding */}
+                      <div className="absolute top-4 right-4">
+                        <div className="bg-red-600 text-white px-2 py-1 rounded text-xs font-semibold flex items-center gap-1">
+                          <ExternalLink className="w-3 h-3" />
+                          YouTube
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <iframe
+                      src="https://www.youtube.com/embed/zFM6XJ7CLZA?autoplay=1&rel=0&modestbranding=1"
+                      title="NAI Success Stories - YouTube Video"
+                      className="w-full h-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  )}
+                </motion.div>
+                
+                {/* Video Description */}
+                <div className="mt-6 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <h4 className="font-semibold text-nai-dark">Real Success Stories</h4>
+                    {isInView && !isVideoPlaying && (
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="bg-nai-highlight text-white text-xs px-2 py-1 rounded-full flex items-center gap-1"
+                      >
+                        <Play className="w-3 h-3" />
+                        Auto-play
+                      </motion.div>
+                    )}
+                  </div>
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    Watch inspiring stories from our graduates who successfully passed the NCLEX-RN and OSCE exams and are now practicing as Registered Nurses in Australia.
+                  </p>
+                  <div className="flex items-center gap-2 text-xs text-gray-500">
+                    <Clock className="w-3 h-3" />
+                    <span>5:30 min</span>
+                    <span>•</span>
+                    <span>HD Quality</span>
+                    <span>•</span>
+                    <span className="text-nai-highlight font-medium">Auto-play on scroll</span>
+                  </div>
+                </div>
               </div>
             </div>
 
             {/* Right - Mission */}
             <div className="flex items-center">
               <div className="bg-gradient-to-br from-nai-highlight/10 to-nai-deep-teal/10 rounded-3xl p-8 border border-nai-highlight/20 w-full">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-r from-nai-highlight to-nai-deep-teal rounded-2xl flex items-center justify-center">
-                    <Star className="w-8 h-8 text-white" />
+                <div className="mb-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 bg-nai-highlight rounded-lg flex items-center justify-center">
+                      <Star className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <span className="text-xs font-semibold text-nai-highlight uppercase tracking-wider">
+                        Our Purpose
+                      </span>
+                      <h3 className="text-xl font-bold text-nai-dark leading-tight">Our Mission</h3>
+                    </div>
                   </div>
-                  <h3 className="text-2xl font-bold text-nai-dark">Our Mission</h3>
+                  <div className="w-16 h-0.5 bg-nai-highlight rounded-full"></div>
                 </div>
-                <blockquote className="text-gray-700 leading-relaxed text-lg italic">
+                <blockquote className="text-gray-700 leading-relaxed text-base sm:text-lg italic mb-6">
                   "At NAI, we don't just train nurses—we empower them to succeed and build a career as a Registered Nurse in Australia."
                 </blockquote>
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <div className="bg-white/50 rounded-full px-4 py-2">
-                    <span className="text-sm font-semibold text-nai-dark">Empowerment</span>
+                <div className="flex flex-wrap gap-2 sm:gap-3">
+                  <div className="bg-white/50 rounded-full px-3 sm:px-4 py-2 border border-white/30">
+                    <span className="text-xs sm:text-sm font-semibold text-nai-dark">Empowerment</span>
                   </div>
-                  <div className="bg-white/50 rounded-full px-4 py-2">
-                    <span className="text-sm font-semibold text-nai-dark">Excellence</span>
+                  <div className="bg-white/50 rounded-full px-3 sm:px-4 py-2 border border-white/30">
+                    <span className="text-xs sm:text-sm font-semibold text-nai-dark">Excellence</span>
                   </div>
-                  <div className="bg-white/50 rounded-full px-4 py-2">
-                    <span className="text-sm font-semibold text-nai-dark">Success</span>
+                  <div className="bg-white/50 rounded-full px-3 sm:px-4 py-2 border border-white/30">
+                    <span className="text-xs sm:text-sm font-semibold text-nai-dark">Success</span>
                   </div>
                 </div>
               </div>
@@ -344,9 +532,15 @@ const OurStory = () => {
           viewport={{ once: true }}
           className="mb-20"
         >
-          <h3 className="text-3xl font-bold text-center text-nai-dark mb-12">
-            Why Choose <span className="text-gradient">NAI?</span>
-          </h3>
+          <div className="text-center mb-8">
+            <span className="text-xs font-semibold text-nai-highlight uppercase tracking-wider mb-2 block">
+              Our Excellence
+            </span>
+            <h3 className="text-xl sm:text-2xl font-bold text-nai-dark mb-3">
+              Why Choose <span className="text-nai-highlight">NAI?</span>
+            </h3>
+            <div className="w-12 h-0.5 bg-nai-highlight rounded-full mx-auto"></div>
+          </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {achievements.map((achievement, index) => (
               <motion.div
@@ -411,9 +605,15 @@ const OurStory = () => {
           viewport={{ once: true }}
           className="mb-20"
         >
-          <h3 className="text-3xl font-bold text-center text-nai-dark mb-12">
-            Our <span className="text-gradient">Training Programs</span>
-          </h3>
+          <div className="text-center mb-8">
+            <span className="text-xs font-semibold text-nai-highlight uppercase tracking-wider mb-2 block">
+              What We Offer
+            </span>
+            <h3 className="text-xl sm:text-2xl font-bold text-nai-dark mb-3">
+              Our <span className="text-nai-highlight">Training Programs</span>
+            </h3>
+            <div className="w-12 h-0.5 bg-nai-highlight rounded-full mx-auto"></div>
+          </div>
           <div className="grid lg:grid-cols-3 gap-8">
             {trainingPrograms.map((program, index) => (
               <motion.div
@@ -503,20 +703,20 @@ const OurStory = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="bg-gradient-to-r from-nai-highlight to-nai-deep-teal rounded-3xl p-8 text-white text-center"
+          className="bg-gradient-to-r from-nai-highlight to-nai-deep-teal rounded-2xl sm:rounded-3xl p-6 sm:p-8 text-white text-center"
         >
           <div className="flex items-center justify-center gap-3 mb-6">
-            <Clock className="w-8 h-8" />
-            <h3 className="text-2xl font-bold">Opening Hours</h3>
+            <Clock className="w-6 h-6 sm:w-8 sm:h-8" />
+            <h3 className="text-xl sm:text-2xl font-bold">Opening Hours</h3>
           </div>
-          <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-              <h4 className="font-semibold mb-2">Monday to Saturday</h4>
-              <p className="text-lg">9:00 AM – 5:00 PM</p>
+          <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 max-w-2xl mx-auto">
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/20">
+              <h4 className="font-semibold mb-2 text-sm sm:text-base">Monday to Saturday</h4>
+              <p className="text-base sm:text-lg">9:00 AM – 5:00 PM</p>
             </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-              <h4 className="font-semibold mb-2">Sunday</h4>
-              <p className="text-lg">Closed</p>
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/20">
+              <h4 className="font-semibold mb-2 text-sm sm:text-base">Sunday</h4>
+              <p className="text-base sm:text-lg">Closed</p>
             </div>
           </div>
         </motion.div>
