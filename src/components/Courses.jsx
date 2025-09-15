@@ -2,7 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { ArrowRight, CheckCircle, Clock, Users } from 'lucide-react'
+import { ArrowRight, CheckCircle, Clock, Users, Award, BookOpen, Target } from 'lucide-react'
 
 const Courses = () => {
   const ref = useRef(null)
@@ -23,8 +23,8 @@ const Courses = () => {
       ],
       duration: "12 weeks",
       students: "50+ per cohort",
-      color: "from-blue-500 to-blue-600",
-      icon: "🏥",
+      color: "slate",
+      icon: Award,
       price: "AUD $2,500",
       successRate: "94%",
       nextIntake: "March 2024",
@@ -41,7 +41,8 @@ const Courses = () => {
         "IELTS 7.0 or equivalent",
         "Valid nursing license from home country",
         "Minimum 2 years clinical experience"
-      ]
+      ],
+      priority: "Most Popular"
     },
     {
       title: "NCLEX-NGN Preparation",
@@ -57,8 +58,8 @@ const Courses = () => {
       ],
       duration: "16 weeks",
       students: "30+ per cohort",
-      color: "from-green-500 to-green-600",
-      icon: "📚",
+      color: "emerald",
+      icon: BookOpen,
       price: "AUD $3,200",
       successRate: "96%",
       nextIntake: "February 2024",
@@ -75,7 +76,8 @@ const Courses = () => {
         "English proficiency (IELTS 7.0+)",
         "Valid nursing license",
         "Completed nursing education verification"
-      ]
+      ],
+      priority: "Comprehensive"
     },
     {
       title: "OSCE Intensive Training",
@@ -91,8 +93,8 @@ const Courses = () => {
       ],
       duration: "8 weeks",
       students: "20+ per cohort",
-      color: "from-purple-500 to-purple-600",
-      icon: "🎯",
+      color: "indigo",
+      icon: Target,
       price: "AUD $1,800",
       successRate: "92%",
       nextIntake: "April 2024",
@@ -109,226 +111,206 @@ const Courses = () => {
         "Basic clinical skills competency",
         "English communication proficiency",
         "Commitment to intensive practice schedule"
-      ]
+      ],
+      priority: "Intensive"
     }
   ]
 
+  const getColorClasses = (color) => {
+    const colorMap = {
+      slate: {
+        bg: 'bg-slate-50',
+        border: 'border-slate-200',
+        text: 'text-slate-600',
+        accent: 'text-slate-800',
+        icon: 'bg-slate-100 text-slate-700',
+        button: 'bg-slate-800 hover:bg-slate-900 text-white'
+      },
+      emerald: {
+        bg: 'bg-emerald-50',
+        border: 'border-emerald-200',
+        text: 'text-emerald-600',
+        accent: 'text-emerald-800',
+        icon: 'bg-emerald-100 text-emerald-700',
+        button: 'bg-emerald-700 hover:bg-emerald-800 text-white'
+      },
+      indigo: {
+        bg: 'bg-indigo-50',
+        border: 'border-indigo-200',
+        text: 'text-indigo-600',
+        accent: 'text-indigo-800',
+        icon: 'bg-indigo-100 text-indigo-700',
+        button: 'bg-indigo-700 hover:bg-indigo-800 text-white'
+      }
+    }
+    return colorMap[color] || colorMap.slate
+  }
+
   return (
-    <section ref={ref} className="section-padding bg-nai-soft">
-      <div className="container-responsive">
+    <section ref={ref} className="py-24 bg-gradient-to-b from-white to-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header Section */}
         <motion.div 
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-nai-dark mb-6">
-            Our <span className="text-gradient">Courses</span>
+          <div className="inline-flex items-center px-4 py-2 bg-nai-highlight/10 rounded-full mb-6">
+            <span className="text-sm font-medium text-nai-highlight">Professional Training</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
+            Our Training Programs
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Choose from our comprehensive range of courses designed specifically for internationally qualified nurses.
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Expertly designed courses for internationally qualified nurses seeking Australian registration
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
-          {courses.map((course, index) => (
-            <motion.div
-              key={index}
-              className="card p-8 relative overflow-hidden group h-full flex flex-col"
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ scale: 1.02 }}
-            >
-              {/* Background Gradient */}
-              <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${course.color}`}></div>
-              
-              {/* Header */}
-              <div className="mb-6">
-                <div className="text-4xl mb-4">{course.icon}</div>
-                <h3 className="text-2xl font-bold text-nai-dark mb-2">{course.title}</h3>
-                <p className="text-nai-highlight font-semibold mb-3">{course.subtitle}</p>
-                <p className="text-gray-600 leading-relaxed text-sm">{course.description}</p>
-              </div>
-              
-              {/* Price and Success Rate */}
-              <div className="flex justify-between items-center mb-6 p-4 bg-nai-soft rounded-lg">
-                <div>
-                  <div className="text-2xl font-bold text-nai-highlight">{course.price}</div>
-                  <div className="text-sm text-gray-600">Full Program</div>
+        {/* Courses Grid */}
+        <div className="grid lg:grid-cols-3 gap-8 mb-16">
+          {courses.map((course, index) => {
+            const colors = getColorClasses(course.color)
+            return (
+              <motion.div
+                key={index}
+                className="relative group"
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                transition={{ duration: 0.6, delay: index * 0.15 }}
+              >
+                {/* Priority Badge */}
+                {course.priority === "Most Popular" && (
+                  <div className="absolute -top-3 left-6 z-10">
+                    <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-1 rounded-full text-xs font-semibold shadow-lg">
+                      Most Popular
+                    </div>
+                  </div>
+                )}
+                
+                <div className={`relative bg-white rounded-2xl p-8 h-full transition-all duration-300 border-2 ${colors.border} group-hover:border-gray-300 group-hover:shadow-xl group-hover:-translate-y-1`}>
+                  {/* Icon */}
+                  <div className={`w-16 h-16 ${colors.icon} rounded-xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110`}>
+                    <course.icon className="w-8 h-8" />
+                  </div>
+                  
+                  {/* Header */}
+                  <div className="mb-6">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-nai-highlight transition-colors duration-300">
+                      {course.title}
+                    </h3>
+                    <p className="text-gray-600 font-medium mb-3">{course.subtitle}</p>
+                    <p className="text-gray-600 leading-relaxed text-sm">{course.description}</p>
+                  </div>
+                  
+                  {/* Stats */}
+                  <div className="grid grid-cols-2 gap-4 mb-6">
+                    <div className="text-center p-3 bg-gray-50 rounded-lg">
+                      <div className="text-lg font-bold text-green-600">{course.successRate}</div>
+                      <div className="text-xs text-gray-500">Success Rate</div>
+                    </div>
+                    <div className="text-center p-3 bg-gray-50 rounded-lg">
+                      <div className="text-lg font-bold text-gray-900">{course.duration}</div>
+                      <div className="text-xs text-gray-500">Duration</div>
+                    </div>
+                  </div>
+                  
+                  {/* Key Features */}
+                  <div className="mb-8">
+                    <h4 className="font-semibold text-gray-900 mb-3">Key Features:</h4>
+                    <ul className="space-y-2">
+                      {course.features.slice(0, 3).map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-start gap-3">
+                          <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <CheckCircle className="w-3 h-3 text-green-600" />
+                          </div>
+                          <span className="text-gray-600 text-sm leading-relaxed">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  {/* Price */}
+                  <div className="mb-6 p-4 bg-gray-50 rounded-lg">
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-gray-900 mb-1">{course.price}</div>
+                      <div className="text-sm text-gray-600">Complete Program</div>
+                    </div>
+                  </div>
+                  
+                  {/* CTA Button */}
+                  <button className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 ${colors.button} transform group-hover:scale-105 flex items-center justify-center gap-2`}>
+                    Learn More
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                  </button>
                 </div>
-                <div className="text-right">
-                  <div className="text-lg font-bold text-green-600">{course.successRate}</div>
-                  <div className="text-sm text-gray-600">Success Rate</div>
-                </div>
-              </div>
-              
-              {/* Key Features */}
-              <div className="mb-6 flex-grow">
-                <h4 className="font-semibold text-nai-dark mb-3">What You'll Learn:</h4>
-                <ul className="space-y-2">
-                  {course.features.slice(0, 4).map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-600 text-sm">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              
-              {/* Course Details */}
-              <div className="grid grid-cols-2 gap-4 mb-6 text-sm">
-                <div className="flex items-center gap-2 text-gray-600">
-                  <Clock className="w-4 h-4" />
-                  <span>{course.duration}</span>
-                </div>
-                <div className="flex items-center gap-2 text-gray-600">
-                  <Users className="w-4 h-4" />
-                  <span>{course.students}</span>
-                </div>
-                <div className="text-gray-600">
-                  <span className="font-medium">Next Intake:</span><br />
-                  <span className="text-nai-highlight">{course.nextIntake}</span>
-                </div>
-                <div className="text-gray-600">
-                  <span className="font-medium">Includes:</span><br />
-                  <span className="text-nai-highlight">{course.includes.length} modules</span>
-                </div>
-              </div>
-              
-              {/* CTA Button */}
-              <button className="w-full btn-primary flex items-center justify-center gap-2 group-hover:bg-nai-deep-teal mt-auto">
-                Enroll Now
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </button>
-            </motion.div>
-          ))}
+              </motion.div>
+            )
+          })}
         </div>
 
-        {/* Detailed Course Information */}
+        {/* Why Choose Our Programs */}
         <motion.div 
-          className="mt-16"
+          className="bg-white rounded-2xl p-8 md:p-12 shadow-lg border border-gray-100"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <h3 className="text-3xl font-bold text-nai-dark text-center mb-12">
-            Complete Course Details
-          </h3>
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-gray-900 mb-4">
+              Why Choose Our Training Programs?
+            </h3>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Our programs are designed by industry experts with years of experience in Australian healthcare
+            </p>
+          </div>
           
-          <div className="space-y-12">
-            {courses.map((course, index) => (
-              <motion.div
-                key={index}
-                className="bg-white rounded-2xl p-8 shadow-lg"
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
-              >
-                <div className="grid lg:grid-cols-3 gap-8">
-                  {/* Course Overview */}
-                  <div className="lg:col-span-2">
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="text-3xl">{course.icon}</div>
-                      <div>
-                        <h4 className="text-2xl font-bold text-nai-dark">{course.title}</h4>
-                        <p className="text-nai-highlight font-semibold">{course.subtitle}</p>
-                      </div>
-                    </div>
-                    
-                    <p className="text-gray-600 mb-6 leading-relaxed">{course.description}</p>
-                    
-                    {/* All Features */}
-                    <div className="mb-6">
-                      <h5 className="font-semibold text-nai-dark mb-3">Complete Curriculum:</h5>
-                      <ul className="grid md:grid-cols-2 gap-2">
-                        {course.features.map((feature, featureIndex) => (
-                          <li key={featureIndex} className="flex items-start gap-2">
-                            <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                            <span className="text-gray-600 text-sm">{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                  
-                  {/* Course Details Sidebar */}
-                  <div className="space-y-6">
-                    {/* Pricing */}
-                    <div className="bg-nai-soft rounded-xl p-6">
-                      <h5 className="font-semibold text-nai-dark mb-3">Investment</h5>
-                      <div className="text-3xl font-bold text-nai-highlight mb-2">{course.price}</div>
-                      <p className="text-sm text-gray-600">Full program with all materials</p>
-                    </div>
-                    
-                    {/* What's Included */}
-                    <div>
-                      <h5 className="font-semibold text-nai-dark mb-3">What's Included:</h5>
-                      <ul className="space-y-2">
-                        {course.includes.map((item, itemIndex) => (
-                          <li key={itemIndex} className="flex items-start gap-2">
-                            <CheckCircle className="w-4 h-4 text-nai-highlight mt-0.5 flex-shrink-0" />
-                            <span className="text-gray-600 text-sm">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    
-                    {/* Requirements */}
-                    <div>
-                      <h5 className="font-semibold text-nai-dark mb-3">Requirements:</h5>
-                      <ul className="space-y-2">
-                        {course.requirements.map((req, reqIndex) => (
-                          <li key={reqIndex} className="flex items-start gap-2">
-                            <div className="w-2 h-2 bg-nai-highlight rounded-full mt-2 flex-shrink-0"></div>
-                            <span className="text-gray-600 text-sm">{req}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    
-                    {/* Quick Stats */}
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="text-center p-4 bg-white rounded-lg border">
-                        <div className="text-2xl font-bold text-green-600">{course.successRate}</div>
-                        <div className="text-xs text-gray-600">Success Rate</div>
-                      </div>
-                      <div className="text-center p-4 bg-white rounded-lg border">
-                        <div className="text-2xl font-bold text-nai-highlight">{course.duration}</div>
-                        <div className="text-xs text-gray-600">Duration</div>
-                      </div>
-                    </div>
-                    
-                    <button className="w-full btn-primary">
-                      Enroll in {course.title}
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <Award className="w-8 h-8 text-green-600" />
+              </div>
+              <h4 className="text-xl font-semibold text-gray-900 mb-2">Expert Instructors</h4>
+              <p className="text-gray-600">Learn from registered nurses and healthcare professionals with extensive Australian experience</p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <Users className="w-8 h-8 text-blue-600" />
+              </div>
+              <h4 className="text-xl font-semibold text-gray-900 mb-2">Small Class Sizes</h4>
+              <p className="text-gray-600">Personalized attention with limited cohort sizes ensuring quality education for every student</p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <Target className="w-8 h-8 text-purple-600" />
+              </div>
+              <h4 className="text-xl font-semibold text-gray-900 mb-2">Proven Results</h4>
+              <p className="text-gray-600">High success rates and comprehensive support throughout your journey to registration</p>
+            </div>
           </div>
         </motion.div>
 
-        {/* Consultation CTA */}
+        {/* Call to Action */}
         <motion.div 
           className="mt-16 text-center"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
         >
-          <div className="bg-gradient-to-r from-nai-teal to-nai-deep-teal rounded-2xl p-8 text-white">
-            <h3 className="text-2xl font-bold mb-4">
-              Need Help Choosing the Right Course?
+          <div className="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl p-8 md:p-12 text-white">
+            <h3 className="text-3xl font-bold mb-4">
+              Ready to Start Your Journey?
             </h3>
-            <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-              Our education consultants are here to help you select the perfect course based on your background, experience, and career goals.
+            <p className="text-gray-300 mb-8 max-w-2xl mx-auto text-lg">
+              Join thousands of internationally qualified nurses who have successfully obtained their Australian registration through our programs
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="btn-primary bg-white text-nai-deep-teal hover:bg-yellow-300 hover:text-nai-deep-teal">
+              <button className="bg-white text-gray-900 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center gap-2">
                 Schedule Free Consultation
+                <ArrowRight className="w-4 h-4" />
               </button>
-              <button className="btn-secondary border-white text-white hover:bg-white hover:text-nai-deep-teal">
-                Download Course Guide
+              <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-colors duration-300">
+                Download Program Guide
               </button>
             </div>
           </div>

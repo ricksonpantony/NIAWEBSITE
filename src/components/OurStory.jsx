@@ -79,11 +79,11 @@ const OurStory = () => {
 
   const trainingPrograms = [
     {
-      title: "Next Generation NCLEX-RN (NGN) Training",
-      description: "Focused preparation for the computer-based exam assessing critical thinking and clinical judgment.",
+      title: "Next Generation NCLEX-RN Training",
+      description: "Comprehensive preparation for the computer-based exam with focus on critical thinking and clinical judgment skills.",
       icon: Target,
       features: ["Computer-based exam preparation", "Critical thinking assessment", "Clinical judgment training"],
-      color: "from-orange-500 to-red-500",
+      color: "slate",
       duration: "8-12 Weeks",
       level: "Intermediate",
       price: "Contact for Pricing",
@@ -91,11 +91,11 @@ const OurStory = () => {
       stats: "85% Pass Rate"
     },
     {
-      title: "OSCE Training",
+      title: "OSCE Training Program",
       description: "Hands-on coaching to demonstrate safe, competent, and professional nursing practice in simulated clinical scenarios.",
       icon: Users,
       features: ["Simulated clinical scenarios", "Hands-on coaching", "Professional practice demonstration"],
-      color: "from-teal-500 to-cyan-500",
+      color: "emerald",
       duration: "6-10 Weeks",
       level: "Advanced",
       price: "Contact for Pricing",
@@ -104,10 +104,10 @@ const OurStory = () => {
     },
     {
       title: "OBA Pathway Guidance",
-      description: "End-to-end support to meet NMBA and AHPRA requirements.",
+      description: "Complete end-to-end support to meet NMBA and AHPRA requirements for Australian nursing registration.",
       icon: CheckCircle,
       features: ["NMBA compliance", "AHPRA requirements", "End-to-end support"],
-      color: "from-indigo-500 to-purple-500",
+      color: "indigo",
       duration: "12-16 Weeks",
       level: "Complete",
       price: "Contact for Pricing",
@@ -267,7 +267,7 @@ const OurStory = () => {
             <div className="relative">
               <div className="relative h-80 sm:h-96 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl">
                 <div className="absolute inset-0 bg-gradient-to-br from-nai-highlight/20 to-nai-deep-teal/20 z-10"></div>
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')] bg-cover bg-center"></div>
+                <div className="absolute inset-0 bg-[url('/Images/A_group_of_professional_nurses_in_teal_scrubs_diverse_in_ethnicity_and_gender_standing_together_confidently_with_warm_smiles._Some_nurses_may_hold_clipboards_stethoscopes_or_tablets_t.webp')] bg-cover bg-center"></div>
               </div>
               {/* Floating Stats */}
               <div className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-xl border border-gray-100">
@@ -605,14 +605,16 @@ const OurStory = () => {
           viewport={{ once: true }}
           className="mb-20"
         >
-          <div className="text-center mb-8">
-            <span className="text-xs font-semibold text-nai-highlight uppercase tracking-wider mb-2 block">
-              What We Offer
-            </span>
-            <h3 className="text-xl sm:text-2xl font-bold text-nai-dark mb-3">
-              Our <span className="text-nai-highlight">Training Programs</span>
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center px-4 py-2 bg-nai-highlight/10 rounded-full mb-6">
+              <span className="text-sm font-medium text-nai-highlight">Professional Training</span>
+            </div>
+            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 tracking-tight">
+              Our Training Programs
             </h3>
-            <div className="w-12 h-0.5 bg-nai-highlight rounded-full mx-auto"></div>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Comprehensive programs designed to help you succeed in your nursing career in Australia
+            </p>
           </div>
           <div className="grid lg:grid-cols-3 gap-8">
             {trainingPrograms.map((program, index) => (
@@ -624,73 +626,83 @@ const OurStory = () => {
                 viewport={{ once: true }}
                 className="group"
               >
-                <div className="relative bg-white rounded-3xl p-8 shadow-xl border border-gray-100 h-full hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 overflow-hidden">
-                  {/* Background Gradient */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${program.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
-                  
-                  {/* Badge */}
-                  <div className={`absolute top-6 right-6 bg-gradient-to-r ${program.color} text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg`}>
-                    {program.badge}
+                {/* Priority Badge */}
+                {program.badge === "Most Popular" && (
+                  <div className="absolute -top-3 left-6 z-10">
+                    <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-1 rounded-full text-xs font-semibold shadow-lg">
+                      Most Popular
+                    </div>
+                  </div>
+                )}
+                
+                <div className={`relative bg-white rounded-2xl p-8 h-full transition-all duration-300 border-2 ${
+                  program.color === 'slate' ? 'border-slate-200 group-hover:border-gray-300' :
+                  program.color === 'emerald' ? 'border-emerald-200 group-hover:border-gray-300' :
+                  program.color === 'indigo' ? 'border-indigo-200 group-hover:border-gray-300' :
+                  'border-slate-200 group-hover:border-gray-300'
+                } group-hover:shadow-xl group-hover:-translate-y-1`}>
+                  {/* Icon */}
+                  <div className={`w-16 h-16 ${
+                    program.color === 'slate' ? 'bg-slate-100 text-slate-700' :
+                    program.color === 'emerald' ? 'bg-emerald-100 text-emerald-700' :
+                    program.color === 'indigo' ? 'bg-indigo-100 text-indigo-700' :
+                    'bg-slate-100 text-slate-700'
+                  } rounded-xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110`}>
+                    <program.icon className="w-8 h-8" />
                   </div>
                   
-                  {/* Icon with enhanced styling */}
-                  <div className={`w-20 h-20 bg-gradient-to-r ${program.color} rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-xl relative`}>
-                    <program.icon className="w-10 h-10 text-white" />
-                    <div className={`absolute inset-0 bg-gradient-to-r ${program.color} rounded-3xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-300`}></div>
+                  {/* Header */}
+                  <div className="mb-6">
+                    <h4 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-nai-highlight transition-colors duration-300">
+                      {program.title}
+                    </h4>
+                    <p className="text-gray-600 leading-relaxed text-sm mb-4">{program.description}</p>
                   </div>
                   
-                  {/* Title */}
-                  <h4 className="text-xl font-bold text-nai-dark mb-4 leading-tight group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-nai-highlight group-hover:to-nai-deep-teal group-hover:bg-clip-text transition-all duration-300">
-                    {program.title}
-                  </h4>
-                  
-                  {/* Stats Row */}
+                  {/* Stats */}
                   <div className="grid grid-cols-2 gap-4 mb-6">
-                    <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-3 text-center">
-                      <div className="text-sm font-bold text-nai-dark">{program.stats}</div>
+                    <div className="text-center p-3 bg-gray-50 rounded-lg">
+                      <div className="text-sm font-bold text-green-600">{program.stats}</div>
                       <div className="text-xs text-gray-500">Success Rate</div>
                     </div>
-                    <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-3 text-center">
-                      <div className="text-sm font-bold text-blue-600">{program.duration}</div>
-                      <div className="text-xs text-blue-500">Duration</div>
+                    <div className="text-center p-3 bg-gray-50 rounded-lg">
+                      <div className="text-sm font-bold text-gray-900">{program.duration}</div>
+                      <div className="text-xs text-gray-500">Duration</div>
                     </div>
                   </div>
                   
-                  {/* Level Badge */}
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="bg-gradient-to-r from-purple-100 to-purple-200 rounded-full px-3 py-1">
+                  {/* Level and Price */}
+                  <div className="flex items-center gap-2 mb-6">
+                    <div className="bg-purple-100 rounded-full px-3 py-1">
                       <span className="text-xs font-semibold text-purple-700">{program.level} Level</span>
                     </div>
-                    <div className="bg-gradient-to-r from-green-100 to-green-200 rounded-full px-3 py-1">
+                    <div className="bg-green-100 rounded-full px-3 py-1">
                       <span className="text-xs font-semibold text-green-700">{program.price}</span>
                     </div>
                   </div>
                   
-                  {/* Description */}
-                  <p className="text-gray-600 leading-relaxed mb-6 text-sm">{program.description}</p>
-                  
-                  {/* Features with enhanced styling */}
-                  <div className="space-y-3 mb-6">
+                  {/* Features */}
+                  <div className="space-y-3 mb-8">
                     {program.features.map((feature, featureIndex) => (
-                      <div key={featureIndex} className="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors duration-200">
-                        <div className="flex-shrink-0 w-6 h-6 bg-gradient-to-r from-green-400 to-green-500 rounded-full flex items-center justify-center mt-0.5">
-                          <CheckCircle className="w-3 h-3 text-white" />
+                      <div key={featureIndex} className="flex items-start gap-3">
+                        <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <CheckCircle className="w-3 h-3 text-green-600" />
                         </div>
-                        <span className="text-sm text-gray-700 leading-relaxed">{feature}</span>
+                        <span className="text-sm text-gray-600 leading-relaxed">{feature}</span>
                       </div>
                     ))}
                   </div>
                   
                   {/* CTA Button */}
-                  <div className="mt-auto">
-                    <button className={`w-full bg-gradient-to-r ${program.color} text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg group-hover:shadow-xl flex items-center justify-center gap-2`}>
-                      <span>Learn More</span>
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                    </button>
-                  </div>
-                  
-                  {/* Decorative Elements */}
-                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-nai-highlight to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <button className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 ${
+                    program.color === 'slate' ? 'bg-slate-800 hover:bg-slate-900 text-white' :
+                    program.color === 'emerald' ? 'bg-emerald-700 hover:bg-emerald-800 text-white' :
+                    program.color === 'indigo' ? 'bg-indigo-700 hover:bg-indigo-800 text-white' :
+                    'bg-slate-800 hover:bg-slate-900 text-white'
+                  } transform group-hover:scale-105 flex items-center justify-center gap-2`}>
+                    Learn More
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                  </button>
                 </div>
               </motion.div>
             ))}
